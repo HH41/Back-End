@@ -1,0 +1,153 @@
+index.vue
+
+<template>
+	<view class="content">
+		<image class="logo" src="/static/logo.png"></image>
+		<view class="text-area">
+			<text class="title">{{title}}</text>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				title: 'Hello'
+			}
+		},
+		onLoad() {
+
+		},
+		methods: {
+
+		}
+	}
+</script>
+
+<style>
+	.content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.logo {
+		height: 200rpx;
+		width: 200rpx;
+		margin-top: 200rpx;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 50rpx;
+	}
+
+	.text-area {
+		display: flex;
+		justify-content: center;
+	}
+
+	.title {
+		font-size: 36rpx;
+		color: #8f8f94;
+	}
+</style>
+
+APP.vue
+
+<script>
+	export default {
+		onLaunch: function() {
+			console.log('App Launch')
+		},
+		onShow: function() {
+			console.log('App Show')
+		},
+		onHide: function() {
+			console.log('App Hide')
+		}
+	}
+</script>
+
+<style>
+	/*每个页面公共css */
+</style>
+
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title></title>
+    <!--preload-links-->
+    <!--app-context-->
+  </head>
+  <body>
+    <div id="app"><!--app-html--></div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
+
+main.js
+
+import App from './App'
+
+// #ifndef VUE3
+import Vue from 'vue'
+Vue.config.productionTip = false
+App.mpType = 'app'
+const app = new Vue({
+    ...App
+})
+app.$mount()
+// #endif
+
+// #ifdef VUE3
+import { createSSRApp } from 'vue'
+export function createApp() {
+  const app = createSSRApp(App)
+  return {
+    app
+  }
+}
+// #endif
+
+pages.json
+
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		
+		{
+			"path": "pages/index/index"
+			
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",//导航栏文字颜色（仅有black和white）
+		"navigationBarTitleText": "MyDra",//导航栏标题
+		"navigationBarBackgroundColor": "#F8F8F8",//导航栏颜色
+		"backgroundColor": "#007AFF",//窗口背景色
+		"enablePullDownRefresh":true,//开启下拉
+		"backgroundTextStyle":"light"//loading颜色
+	},
+	"tabBar":{//下面的那行
+	"color":"#333333",//默认文字颜色
+	"selectedColor":"#4CD964",  //选中时文字颜色
+	"backgroundColor":"#FFFFFF",//背景颜色
+	"borderStyle":"black",// 上边框颜色
+	"position":"bottom",// tabbar位置
+		"list":[//数组2~5个，存tabbar里面的东西
+	    {
+			"text":"热点",
+			"pagePath":"pages/index/index",//要跳转的页面的路径
+			"iconPath":"static/logo.png", // 默认图标样式
+			"selectedIconPath":"./static/logo.png" // 选中时图标样式
+		}
+		]
+	}
+}
+
+
+
