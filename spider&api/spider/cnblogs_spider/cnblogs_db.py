@@ -12,7 +12,7 @@ class DataManager:
         self.db = self.connect_to_db(db_name)
 
     def connect_to_db(self, db_name):
-        db = pymysql.connect(host='localhost', user='root', password='020506Zhy!', port=3306, db=db_name)
+        db = pymysql.connect(host='localhost', user='root', password='密码', port=3306, db=db_name)
         return db
 
     def close_db(self):
