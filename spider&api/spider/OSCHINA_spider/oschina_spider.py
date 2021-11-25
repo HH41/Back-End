@@ -36,7 +36,7 @@ def parse_page(html):
 def spider():
     url_lis = []
     url_lis = oschina_spider_getURL.get_url()
-    db_manager = DataManager('dbase')
+    db_manager = DataManager('sys')
     db_manager.clear_table()
     for url in url_lis:
         print(url)

@@ -1,4 +1,4 @@
-# -*- coding : utf-8 -*-
+# -*- coding : utf-7 -*-
 # @Time : 2021/11/12 10:23
 # @Author : zhy
 # @File : api.py
@@ -7,19 +7,25 @@
 from dbase_operate import oschina_news, db, app, CSDN_news, cnblogs_news, CSDN_collection, CSDN_username
 import json
 from flask import request
-from spider.CSDN_spider.CSDN_collection_spider import CSDN_collect_spider
+from flask_cors import CORS
+
+import sys
+sys.path.append('/root/myfirstbackend/software_work/spider/CSDN_spider')
+
+from CSDN_collection_spider import CSDN_collect_spider
 
 
 db.init_app(app)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config['JSON_AS_ASCII'] = False
 app.secret_key = "123"
+CORS(app, supports_credentials=True)
 
 
 @app.route("/oschinanews/titlelist", methods=["GET"])            # oschina热点资讯标题接口
 def oschina_titlelist():
     s = oschina_news()
-    list_ans = []                                                # 需要返回的标题列表
+    list_ans = []                                                # 需>要返回的标题列表
     list_ans = s.title_list()
     dict1 = {'statu': 200, 'msg': 'Success'}
     json1 = json.loads(json.dumps(dict1))
@@ -28,7 +34,7 @@ def oschina_titlelist():
 
 
 @app.route("/oschinanews/content/<title>", methods=["GET"])      # oschina热点资讯内容接口
-def oschina_content(title):                                      # 参数：需要返回内容的文章的标题
+def oschina_content(title):                                      # 参>数：需要返回内容的文章的标题
     s = oschina_news()
     dict1 = {'statu': 200, 'msg': 'Success'}
     dict2 = {'statu': 404, 'msg': 'Title Loss'}
@@ -189,4 +195,4 @@ def run_csdn_collection_spider(wechatid):                              # 参数�
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0')

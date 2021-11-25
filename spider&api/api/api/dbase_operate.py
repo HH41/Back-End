@@ -10,7 +10,7 @@ from sqlalchemy.databases import mysql
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:020506zhhy@127.0.0.1:3306/dbase'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'mysql+pymysql://root:密码@127.0.0.1:3306/sys'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "zzz"
 
@@ -19,7 +19,7 @@ db = SQLAlchemy(app)
 # 每个类对应数据库中的一个表，其中包含需要对表进行的操作
 
 
-class oschina_news(db.Model):                           # oschina热点资讯表
+class oschina_news(db.Model):                           # oschina热点>资讯表
     __tablename__ = "oschina_news"
     title = db.Column(db.VARCHAR(100), primary_key=True)
     content = db.Column(mysql.MSMediumText, nullable=False)
@@ -40,8 +40,9 @@ class oschina_news(db.Model):                           # oschina热点资讯表
         return s.content
 
 
-class CSDN_news(db.Model):                              # CSDN热点资讯表
-    __tablename__ = "CSDN_news"
+class CSDN_news(db.Model):                              # CSDN热点资讯
+表
+    __tablename__ = "csdn_news"
     title = db.Column(db.VARCHAR(100), primary_key=True)
     content = db.Column(mysql.MSMediumText, nullable=False)
 
@@ -61,7 +62,7 @@ class CSDN_news(db.Model):                              # CSDN热点资讯表
         return s.content
 
 
-class cnblogs_news(db.Model):                            # 博客园热点资讯表
+class cnblogs_news(db.Model):                            # 博客园热点>资讯表
     __tablename__ = "cnblogs_news"
     title = db.Column(db.VARCHAR(100), primary_key=True)
     content = db.Column(mysql.MSMediumText, nullable=False)
@@ -82,7 +83,7 @@ class cnblogs_news(db.Model):                            # 博客园热点资讯
         return s.content
 
 
-class CSDN_collection(db.Model):                           # CSDN收藏夹表
+class CSDN_collection(db.Model):                           # CSDN收藏>夹表
     __tablename__ = "csdn_collection"
     wechat_id = db.Column(db.VARCHAR(100), primary_key=True)
     title = db.Column(db.VARCHAR(100), primary_key=True)
@@ -104,7 +105,7 @@ class CSDN_collection(db.Model):                           # CSDN收藏夹表
         return s.content
 
 
-class CSDN_username(db.Model):                             # CSDN账号密码表
+class CSDN_username(db.Model):                             # CSDN账号>密码表
     __tablename__ = "csdn_username"
     wechat_id = db.Column(db.VARCHAR(100), primary_key=True)
     username = db.Column(db.VARCHAR(100), nullable=False)

@@ -7,11 +7,13 @@
 import requests
 from urllib.parse import urlencode
 import re
-from spider.CSDN_spider.CSDN_db import DataManager
 
-headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
-                  '(KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
+import sys
+sys.path.append('/root/myfirstbackend/software_work/spider/CSDN_spider')
+
+from CSDN_db import DataManager
+
+headers = {    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '                  '(KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
 }
 
 
@@ -89,7 +91,7 @@ def CSDN_collect_spider(wechat_id):
 
     # 以上为获取收藏夹中博客url过程
 
-    db = DataManager('dbase')
+    db = DataManager('sys')
     for url in collect_url_list:
         data = {}
         html = get_page(url)
@@ -101,4 +103,4 @@ def CSDN_collect_spider(wechat_id):
 
 
 if __name__ == '__main__':
-    CSDN_collect_spider('test3')
+    CSDN_collect_spider('test4')

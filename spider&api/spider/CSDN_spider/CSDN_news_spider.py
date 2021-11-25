@@ -70,7 +70,7 @@ def parse_page(html):
 def spider():
     url_lis = []
     url_lis = get_urls()
-    db_manager = DataManager('dbase')
+    db_manager = DataManager('sys')
     db_manager.clear_table()
     for url in url_lis:
         data = {}

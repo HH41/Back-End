@@ -12,7 +12,7 @@ class DataManager:
         self.db = self.connect_to_db(db_name)
 
     def connect_to_db(self, db_name):
-        db = pymysql.connect(host='localhost', user='root', password='020506zhhy', port=3306, db=db_name)
+        db = pymysql.connect(host='localhost', user='root', password='密码', port=3306, db=db_name)
         return db
 
     def close_db(self):
@@ -20,7 +20,7 @@ class DataManager:
 
     def clear_table(self):                          # 清空资讯表
         cursor = self.db.cursor()
-        sql3 = 'DELETE FROM CSDN_news'
+        sql3 = 'DELETE FROM csdn_news'
         try:
             cursor.execute(sql3)
             self.db.commit()
@@ -31,7 +31,7 @@ class DataManager:
 
     def trans_to_news_table(self, data):            # 插入新的资讯
         cursor = self.db.cursor()
-        sql3 = 'INSERT INTO CSDN_news(title, content) values(%s, %s)'
+        sql3 = 'INSERT INTO csdn_news(title, content) values(%s, %s)'
         try:
             cursor.execute(sql3, (data['title'], data['content']))
             self.db.commit()
@@ -42,7 +42,7 @@ class DataManager:
 
     def trans_to_collection_table(self, data, wechat_id):         # 将获取到的收藏夹存入数据库
         cursor = self.db.cursor()
-        sql3 = 'INSERT IGNORE INTO CSDN_collection(wechat_id,title, content) values(%s,%s, %s)'
+        sql3 = 'INSERT IGNORE INTO cdsn_collection(wechat_id,title, content) values(%s,%s, %s)'
         try:
             cursor.execute(sql3, (wechat_id, data['title'], data['content']))
             self.db.commit()

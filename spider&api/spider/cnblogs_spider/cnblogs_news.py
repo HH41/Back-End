@@ -26,8 +26,13 @@ def get_page(url):
 def parse_page(html):
     s = parsel.Selector(html)
     title_ans = s.xpath('//h1/a/span/text()').get()
-    content = re.compile(r'<div class="postBody">(.*?)</div>', re.S)
-    content_ans = re.search(content, html).group(1)
+    try:
+        content = re.compile(r'<div class="postBody">(.*?)</div>', re.S)
+        content_ans = re.search(content, html).group(1)
+    except Exception as e:
+        print(e)
+        content = re.compile(r'<div class="post">(.*?)</div>', re.S)
+        content_ans = re.search(content, html).group(1)
     # print(title_ans)
     # print(content_ans)
     return title_ans, content_ans
@@ -43,7 +48,7 @@ def cnblogs_news_spider():
     for li in lis:
         url_lis.append(li.get())
 
-    db_manager = DataManager('dbase')
+    db_manager = DataManager('sys')
     db_manager.clear_table()
     for url in url_lis:
         print(url)
