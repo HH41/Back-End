@@ -2,6 +2,7 @@ import pymysql
 
 
 # 删除操作
+@app.route('/drop',methods=['POST'])
 def drop_into ( ):
 	conn = pymysql.connect ( host='localhost', user='root', password='qwe1234..', db='user', port=3306, charset='utf8' )
 
