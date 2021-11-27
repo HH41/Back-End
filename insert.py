@@ -2,6 +2,7 @@ import pymysql
 
 
 # 插入操作（任务输入）
+@app.route('/insert_A',methods=['POST'])
 def insert_A (message,id ):
 	conn = pymysql.connect ( host='localhost', user='root', password='qwe1234..', db='user', port=3306, charset='utf8' )
 
@@ -19,6 +20,7 @@ def insert_A (message,id ):
 
 
 # 带信息查重的插入操作（任务输入）
+@app.route('/insert_B',methods=['POST'])
 def insert_B ( messgae, id):
 	conn = pymysql.connect ( host='localhost', user='root', password='qwe1234..', db='user', port=3306, charset='utf8' )
 
@@ -36,7 +38,7 @@ def insert_B ( messgae, id):
 
 	if data [ 0 ] == 1:
 
-		print ( "信息已存在, 不可重复插入" )
+		return ( "信息已存在, 不可重复插入" )
 
 	else:
 
@@ -53,6 +55,7 @@ def insert_B ( messgae, id):
 #天数签到为1，未签到为0
 
 # 插入操作（签到输入）
+@app.route('/insert_c',methods=['POST'])
 def insert_c (day_count,id ):
 	conn = pymysql.connect ( host='localhost', user='root', password='qwe1234..', db='user', port=3306, charset='utf8' )
 
@@ -70,6 +73,7 @@ def insert_c (day_count,id ):
 
 
 # 带信息查重的插入操作(签到输入)
+@app.route('/insert_D',methods=['POST'])
 def insert_D ( day_count, id):
 	conn = pymysql.connect ( host='localhost', user='root', password='qwe1234..', db='user', port=3306, charset='utf8' )
 

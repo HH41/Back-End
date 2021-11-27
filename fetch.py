@@ -2,6 +2,7 @@ import pymysql
 
 
 # 获取某一列信息(任务)
+@app.route('/fetch_into1',methods=['POST'])
 def fetch_into1 (id ):
 	conn = pymysql.connect ( host='localhost', user='root', password='qwe1234..', db='user', port=3306, charset='utf8' )
 
@@ -21,9 +22,10 @@ def fetch_into1 (id ):
 
 		if item [ 1 ] == id:
 
-			print ( item [ 0 ] )
+			return  jsonipy( item [ 0 ] )
 
 # 获取某一列信息(签到)
+@app.route('/fetch_into2',methods=['POST'])
 def fetch_into2 (id ):
 	conn = pymysql.connect ( host='localhost', user='root', password='qwe1234..', db='user', port=3306, charset='utf8' )
 
@@ -43,4 +45,4 @@ def fetch_into2 (id ):
 
 		if item [ 1 ] == id:
 
-			print ( item [ 0 ] )
+			return jsonify( item [ 0 ] )

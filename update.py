@@ -2,6 +2,7 @@ import pymysql
 
 
 # 修改信息(任务)
+@app.route('/updata_into1',methods=['POST'])
 def update_into1 (message,id ):
 	conn = pymysql.connect ( host='localhost', user='root', password='qwe1234..', db='user', port=3306, charset='utf8' )
 
@@ -18,6 +19,7 @@ def update_into1 (message,id ):
 	conn.close ( )
 
 #修改信息(签到)
+@app.route('/updata_into2',methods=['POST'])
 def update_into2 (day_count,id ):
 	conn = pymysql.connect ( host='localhost', user='root', password='qwe1234..', db='user', port=3306, charset='utf8' )
 
