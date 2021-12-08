@@ -34,14 +34,20 @@ class oschina_news(db.Model):                           # oschina热点>资讯�
         return list1
 
     def content_details(self, title_name):
-        s = oschina_news.query.filter_by(title=title_name).first()
+        # s = oschina_news.query.filter_by(title=title_name).first()
         # print(type(s))
         # print(s.content)
-        return s.content
+        # return s.content
+        s = oschina_news.query.all()
+        # print(s[0].title)
+        j = 0
+        for i in s:
+            if j == title_name:
+                return i.content
+            j += 1
 
 
-class CSDN_news(db.Model):                              # CSDN热点资讯
-表
+class CSDN_news(db.Model):                              # CSDN热点资讯表
     __tablename__ = "csdn_news"
     title = db.Column(db.VARCHAR(100), primary_key=True)
     content = db.Column(mysql.MSMediumText, nullable=False)
@@ -56,10 +62,16 @@ class CSDN_news(db.Model):                              # CSDN热点资讯
         return list1
 
     def content_details(self, title_name):
-        s = CSDN_news.query.filter_by(title=title_name).first()
-        # print(type(s))
-        # print(s.content)
-        return s.content
+        # s = CSDN_news.query.filter_by(title=title_name).first()
+        # # print(type(s))
+        # # print(s.content)
+        # return s.content
+        s = CSDN_news.query.all()
+        j = 0
+        for i in s:
+            if j == title_name:
+                return i.content
+            j += 1
 
 
 class cnblogs_news(db.Model):                            # 博客园热点>资讯表
@@ -77,10 +89,16 @@ class cnblogs_news(db.Model):                            # 博客园热点>资�
         return list1
 
     def content_details(self, title_name):
-        s = cnblogs_news.query.filter_by(title=title_name).first()
-        # print(type(s))
-        # print(s.content)
-        return s.content
+        # s = cnblogs_news.query.filter_by(title=title_name).first()
+        # # print(type(s))
+        # # print(s.content)
+        # return s.content
+        s = cnblogs_news.query.all()
+        j = 0
+        for i in s:
+            if j == title_name:
+                return i.content
+            j += 1
 
 
 class CSDN_collection(db.Model):                           # CSDN收藏>夹表

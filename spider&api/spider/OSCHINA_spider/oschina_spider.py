@@ -8,6 +8,7 @@ import requests
 import re
 import oschina_spider_getURL
 from oschina_db import DataManager
+import parsel
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
@@ -26,10 +27,12 @@ def get_page(url):
 def parse_page(html):
     title = re.compile(r'<val data-name="weixinShareTitle" data-value="(.*?)"></val>', re.S)
     title_ans = re.search(title, html).group(1)
-    content = re.compile(r'<div class="content">(.*?)</div>', re.S)
-    content_ans = re.search(content, html).group(1)
+    # content = re.compile(r'<div class="content">(.*?)</div>', re.S)
+    # content_ans = re.search(content, html).group(1)
     # print(title_ans)
     # print(content_ans)
+    s = parsel.Selector(html)
+    content_ans = s.xpath('//*[@id="mainScreen"]/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/div').get()
     return title_ans, content_ans
 
 
@@ -41,11 +44,16 @@ def spider():
     for url in url_lis:
         print(url)
         data = {}
-        html = get_page(url)
-        title, content = parse_page(html)
-        data['title'] = title
-        data['content'] = content
-        db_manager.trans_to_oschinadb(data)
+        try:
+            html = get_page(url)
+            title, content = parse_page(html)
+            if not content:
+                continue
+            data['title'] = title
+            data['content'] = content
+            db_manager.trans_to_oschinadb(data)
+        except Exception as e:
+            print(e)
     db_manager.close_db()
 
 

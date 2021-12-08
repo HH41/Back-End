@@ -33,7 +33,7 @@ def oschina_titlelist():
     return json1
 
 
-@app.route("/oschinanews/content/<title>", methods=["GET"])      # oschina热点资讯内容接口
+@app.route("/oschinanews/content/<int:title>", methods=["GET"])      # oschina热点资讯内容接口
 def oschina_content(title):                                      # 参>数：需要返回内容的文章的标题
     s = oschina_news()
     dict1 = {'statu': 200, 'msg': 'Success'}
@@ -67,7 +67,7 @@ def csdn_news_titlelist():
     return json1
 
 
-@app.route("/csdnnews/content/<title>", methods=["GET"])            # CSDN热点资讯内容接口
+@app.route("/csdnnews/content/<int:title>", methods=["GET"])            # CSDN热点资讯内容接口
 def csdn_news_content(title):                                       # 参数：需要返回内容的文章的标题
     s = CSDN_news()
     dict1 = {'statu': 200, 'msg': 'Success'}
@@ -101,7 +101,7 @@ def cnblogs_news_titlelist():
     return json1
 
 
-@app.route("/cnblogsnews/content/<title>", methods=["GET"])                # 博客园热点资讯内容接口
+@app.route("/cnblogsnews/content/<int:title>", methods=["GET"])                # 博客园热点资讯内容接口
 def cnblogs_news_content(title):                                           # 参数：需要返回内容的文章的标题
     s = cnblogs_news()
     dict1 = {'statu': 200, 'msg': 'Success'}
@@ -135,7 +135,7 @@ def csdn_collection_titlelist(wechatid):                                   # 参
     return json1
 
 
-@app.route("/csdncollection/content/<title>", methods=["GET"])             # CSDN收藏夹文章内容接口
+@app.route("/csdncollection/content/<title>", methods=["POST"])             # CSDN收藏夹文章内容接口
 def csdn_collection_content(title):                                        # 参数：需要返回内容的文章的标题
     s = CSDN_collection()
     dict1 = {'statu': 200, 'msg': 'Success'}
@@ -144,7 +144,9 @@ def csdn_collection_content(title):                                        # 参
     try:
         # my_json = request.get_json()
         # print(my_json)
-        get_title = title
+        my_json = request.get_json()
+        # print(my_json)
+        get_title = my_json.get("title")
 
         if not get_title:
             return json.loads(json.dumps(dict2))
